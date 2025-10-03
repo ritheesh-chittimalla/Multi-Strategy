@@ -1,0 +1,70 @@
+/* General */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  color: #3bf7fd;
+}
+
+/* Navbar */
+nav {
+  background: #20efcd;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+nav h1 { margin: 0; }
+nav ul { list-style: none; display: flex; gap: 1rem; }
+nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+
+/* Main Container */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #00796b, #009688);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button:hover { background: linear-gradient(135deg, #004d40, #00796b); }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background: #004d40;
+  color: white;
+}
+tr:hover { background-color: #f1f1f1; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #004d40;
+  color: white;
+  margin-top: 2rem;
+}

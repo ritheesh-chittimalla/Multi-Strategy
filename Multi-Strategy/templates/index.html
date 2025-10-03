@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4">
+    <h4>Upload dataset</h4>
+    <form id="uploadForm">
+      <div class="mb-3">
+        <input type="file" class="form-control" id="fileInput" accept=".csv,.json">
+      </div>
+      <button class="btn btn-primary" type="submit">Upload</button>
+      <div id="uploadMsg" class="mt-2"></div>
+    </form>
+
+    <hr>
+    <h4>Run an algorithm</h4>
+    <form id="runForm">
+      <div class="mb-2">
+        <label class="form-label">Problem</label>
+        <select id="problem" class="form-select">
+          <option value="tsp">TSP (coordinates CSV)</option>
+          <option value="knapsack">Knapsack (id,value,weight CSV)</option>
+          <option value="matching">Graph Matching (adjlist JSON)</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Method</label>
+        <select id="method" class="form-select">
+          <option value="greedy">Greedy</option>
+          <option value="d_p">Dynamic Programming (d_p)</option>
+          <option value="backtracking">Backtracking</option>
+          <option value="branch_and_bound">Branch & Bound</option>
+          <option value="divide_and_conquer">Divide & Conquer</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Dataset</label>
+        <select id="dataset" class="form-select"></select>
+      </div>
+      <button class="btn btn-success" type="submit">Run</button>
+    </form>
+
+    <hr>
+    <h4>Benchmark</h4>
+    <button id="benchBtn" class="btn btn-outline-secondary">Run Benchmark (3 runs)</button>
+    <div id="benchResult" class="mt-3"></div>
+  </div>
+
+  <div class="col-md-8">
+    <h4>Results</h4>
+    <div id="resultsArea" class="card p-3">
+      <pre id="resultText">No results yet.</pre>
+      <canvas id="benchChart" style="max-height:300px;"></canvas>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  loadDatasets();
+});
+</script>
+{% endblock %}

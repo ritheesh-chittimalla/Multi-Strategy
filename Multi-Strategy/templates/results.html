@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Results — {{ problem }}</h3>
+<table class="table">
+  <thead><tr><th>Algorithm</th><th>Result</th></tr></thead>
+  <tbody>
+  {% for k,v in results.items() %}
+    <tr><td>{{ k }}</td><td><pre>{{ v }}</pre></td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a href="/" class="btn btn-secondary">Back</a>
+{% endblock %}

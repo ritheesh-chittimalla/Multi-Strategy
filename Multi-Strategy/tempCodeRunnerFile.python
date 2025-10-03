@@ -1,0 +1,117 @@
+# ----------------------------
+# Genealogical Project in Python
+# ----------------------------
+
+class FamilyTree:
+    def __init__(self):
+        # Store father relationships as list of tuples (father, child)
+        self.father = [
+            ("a", "b"),
+            ("a", "c"),
+            ("b", "d"),
+            ("b", "e"),
+            ("c", "f")
+        ]
+
+    # Add father relation dynamically
+    def add_father(self, f, c):
+        self.father.append((f, c))
+
+    # Helper: get father of a person
+    def get_fathers(self, child):
+        return [f for f, c in self.father if c == child]
+
+    # Brother: share the same father
+    def brother(self, x, y):
+        return any(f in self.get_fathers(x) for f in self.get_fathers(y)) and x != y
+
+    # Cousin: fathers are brothers
+    def cousin(self, x, y):
+        fathers_x = self.get_fathers(x)
+        fathers_y = self.get_fathers(y)
+        for fx in fathers_x:
+            for fy in fathers_y:
+                if self.brother(fx, fy):
+                    return True
+        return False
+
+    # Grandson: Y -> Z -> X
+    def grandson(self, x, y):
+        fathers_x = self.get_fathers(x)
+        for fx in fathers_x:
+            if y in self.get_fathers(fx):
+                return True
+        return False
+
+    # Descendent: recursive
+    def descendent(self, x, y):
+        if y in self.get_fathers(x):
+            return True
+        for f in self.get_fathers(x):
+            if self.descendent(f, y):
+                return True
+        return False
+
+    # Show all facts
+    def show_facts(self):
+        for f, c in self.father:
+            print(f"father({f}, {c})")
+
+
+# ----------------------------
+# Interactive Menu
+# ----------------------------
+def main():
+    tree = FamilyTree()
+
+    while True:
+        print("\n--- Genealogical Project ---")
+        print("1. Add father relation")
+        print("2. Query brother")
+        print("3. Query cousin")
+        print("4. Query grandson")
+        print("5. Query descendent")
+        print("6. Show all facts")
+        print("0. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "0":
+            print("Exiting... Goodbye!")
+            break
+
+        elif choice == "1":
+            f = input("Enter father name: ")
+            c = input("Enter child name: ")
+            tree.add_father(f, c)
+            print("Fact added successfully!")
+
+        elif choice == "2":
+            x = input("Enter first person: ")
+            y = input("Enter second person: ")
+            print("Yes" if tree.brother(x, y) else "No")
+
+        elif choice == "3":
+            x = input("Enter first person: ")
+            y = input("Enter second person: ")
+            print("Yes" if tree.cousin(x, y) else "No")
+
+        elif choice == "4":
+            x = input("Enter grandson: ")
+            y = input("Enter grandfather: ")
+            print("Yes" if tree.grandson(x, y) else "No")
+
+        elif choice == "5":
+            x = input("Enter person (descendent): ")
+            y = input("Enter ancestor: ")
+            print("Yes" if tree.descendent(x, y) else "No")
+
+        elif choice == "6":
+            tree.show_facts()
+
+        else:
+            print("Invalid choice. Try again.")
+
+
+if __name__ == "__main__":
+    main()
